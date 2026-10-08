@@ -589,11 +589,10 @@ EOF
 
   ${B}Miner (server)${N}
     necter-miner init
-    necter-miner join --project 0x<project_id> --payout 0x<your payout address>
+    necter-miner join --project 0x<project_id> --payout 0x<your payout address> --no-run
+    sudo "$BIN/necter-miner" service install      # systemd; runs as you, same identity and data
     necter-miner status
-    # run it as a systemd service (copies the binary to /usr/local/bin first):
-    sudo install -m 0755 "$BIN/necter-miner" /usr/local/bin/necter-miner
-    sudo /usr/local/bin/necter-miner service install
+    (without systemd: leave out --no-run and the service step; join keeps mining in the foreground)
 EOF
     else
       cat <<EOF
@@ -623,8 +622,9 @@ EOF
     cat <<EOF
 
   ${B}Desktop app${N}
-    Drag Necter Miner from the disk image to Applications and open it from there
-    (first launch: Control-click the app, choose Open, then confirm).
+    Drag Necter Miner from the disk image to Applications and open it once. macOS says it
+    cannot verify the developer (testnet builds are not notarized yet): click Done, then
+    System Settings > Privacy & Security > Open Anyway, and confirm.
 EOF
   fi
   say ""
@@ -660,7 +660,6 @@ TMP="$(mktemp -d 2>/dev/null || mktemp -d -t necter)"
 trap 'rm -rf "$TMP"' EXIT INT TERM
 
 say "${B}Necter toolchain${N} ${D}(hivekit v${HIVEKIT_VERSION}, ${TARGET}, into ${NECTER_DIR})${N}"
-mkdir -p "$BIN"
 
 SDK=0
 for l in rust go typescript javascript python; do want "$l" && SDK=1; done
@@ -713,5 +712,5 @@ if [ "$MISSING" = 1 ]; then
 else
   say "${G}Installed.${N}"
 fi
-path_hint
+[ -d "$BIN" ] && path_hint
 next_steps
