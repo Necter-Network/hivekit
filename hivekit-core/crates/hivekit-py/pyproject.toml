@@ -1,0 +1,23 @@
+[build-system]
+requires = ["maturin>=1.5,<2"]
+build-backend = "maturin"
+
+[project]
+name = "hivekit-core"
+description = "Native core for HiveKit: hive-wasm-v1 manifests, Keccak-256 module addresses and .hbc packaging"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://necter.network"
+Repository = "https://github.com/necter-network/hivekit"
+
+[tool.maturin]
+# Import name. The pure-Python SDK owns `hivekit`; this extension is `hivekit_core`.
+module-name = "hivekit_core"
+features = ["extension-module"]

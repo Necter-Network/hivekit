@@ -1,0 +1,10 @@
+[package]
+name = "hive-guest"
+version = "1.0.0"
+edition = "2021"
+description = "hive-wasm-v1 guest ABI helpers shared by the HiveKit interpreter runtimes"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+path = "src/lib.rs"

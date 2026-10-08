@@ -1,0 +1,39 @@
+[package]
+name = "hivekit-py-runtime"
+version = "1.0.0"
+edition = "2021"
+description = "Python interpreter (RustPython) built for hive-wasm-v1: no WASI, deterministic"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+hive-guest = { path = "../../hivekit-js/runtime-js/guest" }
+rustpython-vm = { version = "=0.6.0", default-features = false, features = ["compiler", "serde"] }
+serde_json = "1"
+# rustpython 0.6.0 was released against these exact parser/AST versions;
+# later 0.16.x releases changed the AST and break rustpython-codegen.
+rustpython-ruff_python_ast = "=0.16.5"
+rustpython-ruff_python_parser = "=0.16.5"
+rustpython-ruff_python_trivia = "=0.16.5"
+rustpython-ruff_source_file = "=0.16.5"
+rustpython-ruff_text_size = "=0.16.5"
+getrandom = { version = "0.4", default-features = false }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+debug = false
+incremental = false
+
+[workspace]
+
+# Byte-reproducible builds: see vendor/README.md.
+[patch.crates-io]
+rustpython-derive-impl = { path = "vendor/rustpython-derive-impl" }

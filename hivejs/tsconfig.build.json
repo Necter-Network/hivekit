@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": false, "rootDir": "./src", "outDir": "./dist/cjs", "sourceMap": true, "types": [] },
+  "include": ["src/**/*"]
+}

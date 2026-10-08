@@ -1,0 +1,1 @@
+necter-hivekit @ https://github.com/Necter-Network/hivekit/releases/download/v1.0.0/necter_hivekit-1.0.0-py3-none-any.whl

@@ -1,0 +1,17 @@
+target/
+node_modules/
+dist/
+*.tgz
+*.whl
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.env
+.env.*
+*.key
+*.pem
+.DS_Store
+.idea/
+.vscode/

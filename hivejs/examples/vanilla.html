@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HiveJS example</title>
+</head>
+<body>
+<h2>HiveJS counter</h2>
+<label>Gateway <input id="gw" placeholder="https://ccs.example.org" size="40"></label><br>
+<label>Module <input id="mod" placeholder="0x…" size="70"></label><br>
+<button id="inc">Increment</button>
+<pre id="out"></pre>
+
+<script type="module">
+  // Build first: npm run build (in hivejs/)
+  import { Hive } from '../dist/esm/index.js'
+
+  document.getElementById('inc').addEventListener('click', async () => {
+    const out = document.getElementById('out')
+    try {
+      const hive = new Hive(document.getElementById('mod').value, {
+        gatewayUrl: document.getElementById('gw').value,
+        gasLimit: 50_000_000,
+      })
+      const res = await hive.call('increment', { by: 1 })
+      out.textContent = JSON.stringify({ data: res.data, receipt: res.receiptHash, gas: res.gasUsed, node: res.nodeId, events: res.events }, null, 2)
+    } catch (err) {
+      out.textContent = 'Error: ' + err.message
+    }
+  })
+</script>
+</body>
+</html>

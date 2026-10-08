@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "crates/hivekit-core",
+    "crates/hivekit-py",
+    "crates/hivekit-js",
+]
+resolver = "2"
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/Necter-Network/hivekit"
+homepage = "https://necter.network"
+
+# Profiles must live at the workspace root to take effect.
+[profile.release]
+opt-level = "s"
+lto = true

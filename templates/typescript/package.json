@@ -1,0 +1,12 @@
+{
+  "name": "__NAME__",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "hivec build counter.ts",
+    "inspect": "hivec inspect dist/counter.hbc"
+  },
+  "devDependencies": {
+    "@necter/hivekit": "https://github.com/Necter-Network/hivekit/releases/download/v1.0.0/necter-hivekit-1.0.0.tgz"
+  }
+}

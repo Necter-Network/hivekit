@@ -1,0 +1,29 @@
+[package]
+name = "hivekit-js-runtime"
+version = "1.0.0"
+edition = "2021"
+description = "JavaScript interpreter (Boa) built for hive-wasm-v1: no WASI, deterministic"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+hive-guest = { path = "guest" }
+boa_engine = { version = "=0.22.0", default-features = false }
+# rand -> getrandom has no entropy source on wasm32-unknown-unknown; the custom
+# backend below makes it deterministic (and Math.random is disabled in JS anyway).
+getrandom = { version = "0.4", default-features = false }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+debug = false
+incremental = false
+
+[workspace]

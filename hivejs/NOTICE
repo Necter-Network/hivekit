@@ -1,0 +1,13 @@
+HiveKit
+Copyright 2026 Hive Innovation Lab
+
+This product includes software developed by Hive Innovation Lab for the
+Necter Network (https://necter.network).
+
+hivekit/runtime-py/vendor/rustpython-derive-impl is a modified copy of the
+rustpython-derive-impl crate (version 0.6.0), Copyright (c) 2020 RustPython
+Team, licensed under the MIT License (see the LICENSE file in that directory).
+
+The prebuilt runtimes in hivekit-js/runtime/ and hivekit/hivekit/runtime/ embed
+the Boa JavaScript engine (MIT/Unlicense) and the RustPython interpreter (MIT)
+respectively, together with their Rust dependencies under their own licenses.

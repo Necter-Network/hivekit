@@ -1,0 +1,28 @@
+[package]
+name = "hivekit-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "HiveKit core: canonical hive-wasm-v1 manifests, Keccak-256 content addresses and .hbc packaging for the Necter network"
+documentation = "https://necter.network/docs"
+readme = "README.md"
+keywords = ["hivekit", "necter", "wasm", "hbc", "keccak"]
+categories = ["wasm", "development-tools"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[dependencies]
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+hex = "0.4"
+tiny-keccak = { version = "2.0", features = ["keccak"] }
+zip = { version = "2.1", default-features = false, features = ["deflate"] }
+regex = "1.10"
+wasmparser = { version = "0.261", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+base64 = "0.22"

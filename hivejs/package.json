@@ -1,0 +1,52 @@
+{
+  "name": "@necter/hivejs",
+  "version": "1.0.0",
+  "description": "Call HiveKit modules on the Necter network from browsers and Node through a CCS gateway",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Necter-Network/hivekit.git",
+    "directory": "hivejs"
+  },
+  "keywords": [
+    "necter",
+    "hivejs",
+    "hivekit",
+    "ndsr"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist/",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.json --module ES2020 --outDir dist/esm --declaration false && node -e \"require('fs').writeFileSync('dist/esm/package.json', JSON.stringify({type: 'module'}))\"",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.37.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "homepage": "https://necter.network/docs"
+}

@@ -1,0 +1,9 @@
+#!/bin/sh
+# Stand-in for git while building the runtime. rustpython-vm's build script
+# embeds the commit time of the enclosing repository, or else the current time,
+# in sys.version; report a fixed time (the Unix epoch) and no repository so the
+# build output does not depend on when or where it ran.
+case "$*" in
+  "log -1 --format=%ct") echo 0 ;;
+  *) exit 1 ;;
+esac
