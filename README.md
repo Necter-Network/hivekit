@@ -31,8 +31,10 @@ curl -fsSL https://necter.network/install.sh | sh -s -- go
 curl -fsSL https://necter.network/install.sh | sh -s -- typescript
 curl -fsSL https://necter.network/install.sh | sh -s -- javascript
 curl -fsSL https://necter.network/install.sh | sh -s -- python
-curl -fsSL https://necter.network/install.sh | sh -s -- miner     # necter-miner CLI for servers
-curl -fsSL https://necter.network/install.sh | sh -s -- all
+curl -fsSL https://necter.network/install.sh | sh -s -- miner     # necter-miner CLI (servers, Linux, macOS)
+curl -fsSL https://necter.network/install.sh | sh -s -- desktop   # Necter Miner desktop app (macOS DMG)
+curl -fsSL https://necter.network/install.sh | sh -s -- validator # ndsr + service templates for a node
+curl -fsSL https://necter.network/install.sh | sh -s -- all       # every SDK and the miner CLI
 ```
 
 Options: `--dir DIR` (install prefix, default `~/.necter`), `--version` (installer and tool
@@ -72,36 +74,39 @@ ndsr run dist/my_module.hbc addNumbers --input '{"a":2,"b":3}'
 necter-init go greeter && cd greeter
 go mod tidy
 hivec build .                                        # -> dist/greeter.hbc
-hivec run dist/greeter.hbc addNumbers '{"a":2,"b":3}'
+ndsr run dist/greeter.hbc addNumbers --input '{"a":2,"b":3}'
 ```
 
 **TypeScript** (AssemblyScript target)
 
 ```sh
-necter-init typescript counter && cd counter
+necter-init typescript counter_ts && cd counter_ts
 npm install
 npx hivec build counter.ts                           # -> dist/counter.hbc
-npx hivec run dist/counter.hbc increment 5
+ndsr run dist/counter.hbc increment --input 5
 ```
 
 **JavaScript**
 
 ```sh
-necter-init javascript counter && cd counter
+necter-init javascript counter_js && cd counter_js
 npm install
-npx hivec build counter.js
-npx hivec run dist/counter.hbc increment '{"by":2}'
+npx hivec build counter.js                           # -> dist/counter.hbc
+ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 10000000
 ```
 
-**Python**
+**Python** (3.10+)
 
 ```sh
-necter-init python counter && cd counter
+necter-init python counter_py && cd counter_py
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-hivec build counter.py
-hivec run dist/counter.hbc increment '{"by":2}'
+hivec build counter.py                               # -> dist/counter.hbc
+ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 10000000
 ```
+
+Modules built with the JavaScript or Python engines need more gas than `ndsr run`'s default of
+1,000,000 per call.
 
 Then deploy to the testnet: https://necter.network/docs/deploy/overview/
 
