@@ -11,9 +11,9 @@
 
 set -eu
 
-INSTALLER_VERSION="1.0.0"
+INSTALLER_VERSION="1.0.1"
 HIVEKIT_VERSION="1.0.0"
-MINER_VERSION="1.0.0"
+MINER_VERSION="1.0.1"
 MINER_TAG="v1.0.0-testnet"
 
 HIVEKIT_BASE="${NECTER_HIVEKIT_BASE:-https://github.com/Necter-Network/hivekit/releases/download/v${HIVEKIT_VERSION}}"
