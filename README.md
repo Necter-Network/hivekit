@@ -102,11 +102,12 @@ necter-init python counter_py && cd counter_py
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 hivec build counter.py                               # -> dist/counter.hbc
-ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 10000000
+ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 50000000
 ```
 
 Modules built with the JavaScript or Python engines need more gas than `ndsr run`'s default of
-1,000,000 per call.
+1,000,000 per call: about 2–4 M (JavaScript) and 10–12 M (Python), so pass `--gas 10000000` and
+`--gas 50000000` respectively. `hivec run` uses 1,000,000,000.
 
 Then deploy to the testnet: https://necter.network/docs/deploy/overview/
 

@@ -580,7 +580,7 @@ EOF
     ${PYTHON:-python3} -m venv .venv && . .venv/bin/activate
     pip install -r requirements.txt
     hivec build counter.py                        # -> dist/counter.hbc
-    ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 10000000
+    ndsr run dist/counter.hbc increment --input '{"by":2}' --gas 50000000
 EOF
   fi
   if want miner; then

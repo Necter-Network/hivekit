@@ -104,15 +104,16 @@ Inside a module:
 | | |
 |---|---|
 | `module.wasm` | ~9.6 MiB (pre-initialized interpreter) + your source (≤ 1 MiB); the limit is 12 MiB |
-| Gas per call | ~5M for a small handler (`examples/counter.py`: `get` 4.76M, `increment` 5.08M); a `hive.call` into another Python module adds that module's ~5M |
+| Gas per call | ~10–12M for a small handler on execution revision 2 (the interpreter's data segments are copied in at 1 gas per byte on every call); a `hive.call` into another Python module adds that module's ~10–12M |
 
 Interpreter start-up (creating the VM and installing the `hivekit`/`json`
 modules) happens once, at build time: `runtime-py/build.sh` runs the runtime's
 `__hive_preinit` and snapshots the initialized linear memory into the shipped
 module, so each call starts from a ready interpreter instead of paying ~170M
-gas for start-up. The CCS default gas cap (50M) covers ordinary calls and
-Python-to-Python `hive.call`s; heavy handlers cost more, so pass a higher
-`gas_limit` if needed. Nodes need the 12 MiB `module.wasm` limit (HBC_SPEC §2);
+gas for start-up. Use a gas limit of 50,000,000 for Python calls (the CCS
+default gas cap, and the `max_gas_limit` to give a Python project): it covers
+ordinary calls and Python-to-Python `hive.call`s; heavy handlers cost more, so
+pass a higher `gas_limit` if needed. Nodes need the 12 MiB `module.wasm` limit (HBC_SPEC §2);
 older nodes, limited to 8 MiB, reject Python modules.
 
 ## Tests

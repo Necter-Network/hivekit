@@ -94,8 +94,8 @@ describe('JavaScript engine target: examples/counter.js', () => {
       expect(a.events).toEqual([{ name: 'incremented', data: { by: 2, count: 2 } }])
       const b = run(hbcPath, 'increment', '', data)
       expect(parse(b.output)).toEqual({ count: 3 })
-      // The pre-initialized engine keeps calls within the CCS default gas cap (10M).
-      expect(b.gasUsed).toBeLessThan(10_000_000)
+      // The pre-initialized engine keeps calls well within the CCS default gas cap (50M).
+      expect(b.gasUsed).toBeLessThan(50_000_000)
       const bad = run(hbcPath, 'increment', '{"by":-1}', data)
       expect(bad.success).toBe(false)
       expect(bad.error).toContain('Error: increment must be a positive integer')
